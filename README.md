@@ -6,5 +6,4 @@
 
 ## Step 2: Generate potential numbers and real numbers for forward and reverse sequences.
 
-Running command: Rscript run.R polished_assembly_NCI_57.fasta NCI_57.list.txt NCI_57.report.txt
-
+Rscript run.R Rabkin_4023_assembly.fasta 4023.list.txt 4023.report.txt > 4023.summary.txt

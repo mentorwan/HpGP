@@ -8,6 +8,7 @@
 use strict;
 use warnings;
 use Bio::SeqIO;
+use File::Basename;
 
 @ARGV == 4 or die 
 "usage: $0 motif.gff motif_list.txt polished.fasta gene.fasta\n";
@@ -32,6 +33,9 @@ while ($line1 = <FILE1>)
 	$count++;	
 }
 
+#remove suffix and get directory
+(my $directory= basename($infile))=~ s/\.[^.]+$//;;
+
 #print "Total motif count is ".$count."\n";
 
 my %sequences;
@@ -42,14 +46,14 @@ while(my $seqobj = $seqio->next_seq )
 	 my $seq = $seqobj->seq;
 	 $sequences{$id}=$seq;
 	 print $id."\n";
-	 my $seqout=Bio::SeqIO->new(-file => ">temp.fasta", -format => "fasta");
+	 my $seqout=Bio::SeqIO->new(-file => ">$directory/temp.fasta", -format => "fasta");
 	 $seqout->write_seq($seqobj);
 
 
 
 #run the blast first.
               
-my $result = `blastn -query $fasta1 -subject temp.fasta -outfmt 6 -max_target_seqs 1`;
+my $result = `blastn -query $fasta1 -subject $directory/temp.fasta -outfmt 6 -max_target_seqs 1`;
 
 print "##".$result;
 
