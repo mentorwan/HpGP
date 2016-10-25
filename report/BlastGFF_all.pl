@@ -101,8 +101,10 @@ while ($line = <FILE>){
   else {
   	my @splitarray = split /\t/, $line;
   
+    #print "Debug Split Array is ". $splitarray[0]."\tResult Array is ".$resultarray[0]."\n";
        	
-  	if ($splitarray[0] eq $resultarray[0] and $splitarray[2] ne '.' and  $splitarray[2] ne 'modified_base' and $splitarray[3] >= $resultarray[6] and $splitarray[3] <= $resultarray[7] )  ## only select largest contig, supposely the first contig
+  	#if ($splitarray[0] eq $resultarray[0] and $splitarray[2] ne '.' and  $splitarray[2] ne 'modified_base' and $splitarray[3] >= $resultarray[6] and $splitarray[3] <= $resultarray[7] )  ## only select largest contig, supposely the first contig
+  	if ($splitarray[2] ne '.' and  $splitarray[2] ne 'modified_base' and $splitarray[3] >= $resultarray[6] and $splitarray[3] <= $resultarray[7] )  ## only select largest contig, supposely the first contig
   	{ 
   		   
   		  #print $splitarray[3]."\t". $resultarray[6]."\t".$resultarray[7]."\n";
