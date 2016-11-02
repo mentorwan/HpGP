@@ -31,9 +31,16 @@ forward_reverse_count <- function(gene, report.file) {
   if (length(report.file) == 1) {
     report.file <- scan(report.file, what="character", sep="\n", quiet=TRUE)
   }
-  tmp <- grep(gene, report.file, fixed=TRUE)
-   if (!length(tmp)) return(NULL);
+
+   genetemp <- paste0(gene,"\t");
    
+  tmp <- grep(gene, report.file, fixed=TRUE)
+  
+  tmp1 <- grep(genetemp,report.file,fixed=TRUE)
+  
+  #cat(genetemp,length(tmp),length(tmp1),"\n");
+   if (!length(tmp)) return(NULL);
+  
    row <- tmp[1]
   y   <- report.file[row+1]
   vec <- strsplit(y, "\t", fixed=TRUE)[[1]]
@@ -41,13 +48,11 @@ forward_reverse_count <- function(gene, report.file) {
   start <- as.numeric(vec[7])-1
   end   <- as.numeric(vec[8])-1
   
-  
 
   forwardcount =0
   reversecount =0
-  row <- tmp[length(tmp)]
+  row <- tmp[length(tmp1)+1]
   y <- report.file[row+1]
-  
   while (!is.na(y) & substr(y,1,2) != "HP") 
   {
    vec <- strsplit(y, "\t", fixed=TRUE)[[1]]
@@ -178,7 +183,7 @@ seq_count <- function(seq, pat, map) {
   allseq <- seq_allPossible(pat, map)
   sum <- 0
   for (i in 1:length(allseq)) {
-    sum <- sum + str_count(seq, paste0("(?=",pattern=allseq[i],")"))
+    sum <- sum + str_count(seq, pattern=allseq[i])
   } 
    
   sum
