@@ -6,4 +6,4 @@
 
 ## Step 2: Generate potential numbers and real numbers for forward and reverse sequences.
 
-Rscript run.R Rabkin_4023_assembly.fasta 4023.list.txt 4023.report.txt > 4023.summary.txt
+Rscript run.all.R Rabkin_4023_assembly.fasta 4023.list.txt 4023.report.txt > 4023.summary.txt
